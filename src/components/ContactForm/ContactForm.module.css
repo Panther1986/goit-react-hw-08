@@ -28,11 +28,10 @@
   border-radius: 4px;
   border: 1px solid #939191;
   height: 40px;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  padding-bottom: 10px;
 }
 .labelForm {
   color: black;
@@ -52,8 +51,7 @@
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.btnForm:hover,
-.btnForm:focus {
+.btnForm:hover {
   background-color: grey;
 }
 

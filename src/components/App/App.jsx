@@ -5,10 +5,7 @@ import { PrivateRoute } from "../PrivareRoute/PrivareRoute";
 import { RestrictedRoute } from "../RestrictedRoute/RestrictedRoute";
 import { refreshUser } from "../../redux/auth/operations";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
-import ContactList from "../ContactList/ContactList";
-import ContactForm from "../ContactForm/ContactForm";
-import SearchBox from "../SearchBox/SearchBox";
-import css from "./App.module.css";
+
 import { useDispatch, useSelector } from "react-redux";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
@@ -25,46 +22,50 @@ const App = () => {
   const { isRefreshing } = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    if (!isRefreshing) {
+      dispatch(refreshUser());
+    }
+  }, [dispatch, isRefreshing]);
 
-  return isRefreshing ? (
-    <b>Refreshing user...</b>
-  ) : (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/contacts"
-              component={<RegisterPage />}
+  return (
+    <>
+      {isRefreshing ? (
+        <b>Refreshing user...</b>
+      ) : (
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<RegisterPage />}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
-          }
-        />
-        {/* <div className={css.mainContainer}>
-          <div>
-            <h1 className={css.mainText}>Phonebook</h1>
-            <ContactForm />
-            <SearchBox />
-            <ContactList />
-          </div>
-        </div> */}
-      </Routes>
-    </Layout>
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<LoginPage />}
+                />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<ContactsPage />}
+                />
+              }
+            />
+          </Routes>
+        </Layout>
+      )}
+    </>
   );
 };
 

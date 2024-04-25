@@ -5,8 +5,9 @@ import ContactList from "../../components/ContactList/ContactList";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { selectLoading } from "../../redux/contacts/selectors";
+import SearchBox from "../../components/SearchBox/SearchBox";
 
-export default function TasksPage() {
+export default function ContactPage() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
 
@@ -15,11 +16,13 @@ export default function TasksPage() {
   }, [dispatch]);
 
   return (
-    <>
-      <DocumentTitle>Your tasks</DocumentTitle>
+    <div>
+      <h1>Phonebook</h1>
+      <DocumentTitle>Your contacts</DocumentTitle>
       <ContactForm />
       <div>{isLoading && "Request in progress..."}</div>
+      <SearchBox />
       <ContactList />
-    </>
+    </div>
   );
 }

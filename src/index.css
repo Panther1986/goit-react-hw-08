@@ -15,17 +15,16 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: aquamarine;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: aquamarine;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -60,7 +59,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: rgb(59, 48, 161);
   }
   button {
     background-color: #f9f9f9;
