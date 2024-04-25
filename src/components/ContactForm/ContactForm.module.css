@@ -52,3 +52,12 @@
   margin-bottom: 20px;
   margin-top: 10px;
 }
+.btnForm:hover,
+.btnForm:focus {
+  background-color: grey;
+}
+
+.error {
+  color: red;
+  font-weight: 700;
+}
