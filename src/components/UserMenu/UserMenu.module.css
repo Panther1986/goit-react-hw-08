@@ -6,4 +6,14 @@
 
 .username {
   font-weight: 700;
+  color: rgb(83, 31, 135);
+  font-style: italic;
+}
+.btnLogout {
+  color: black;
+  cursor: pointer;
+  background-color: #cfcfd4;
+}
+.btnLogout:hover {
+  background-color: grey;
 }

@@ -58,10 +58,11 @@ export const selectError = createSelector(
 );
 
 export const selectFilteredContacts = createSelector(
-  [selectContacts, (state) => state.filters.name],
+  [selectContacts, (state) => state.filters.name || state.filters.number],
   (contacts, filterName) => {
-    return contacts.items.filter((contact) =>
-      contact.name.includes(filterName)
+    return contacts.items.filter(
+      (contact) =>
+        contact.name.includes(filterName) || contact.number.includes(filterName)
     );
   }
 );

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import css from "./RegisterForm.module.css";
+import { toast } from "react-toastify";
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export const RegisterForm = () => {
         password: form.elements.password.value,
       })
     );
-
     form.reset();
   };
 
@@ -34,7 +34,9 @@ export const RegisterForm = () => {
         Password
         <input type="password" name="password" />
       </label>
-      <button type="submit">Register</button>
+      <button className={css.btnRegister} type="submit">
+        Register
+      </button>
     </form>
   );
 };

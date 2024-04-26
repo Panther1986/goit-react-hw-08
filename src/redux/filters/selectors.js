@@ -1,7 +1,3 @@
-// export const selectLoading = (state) => state.contacts.loading;
-
-// export const selectFilter = (state) => state.contacts.filter;
-
-// export const selectAllTasks = (state) => state.contacts.items;
-
-export const selectNameFilter = (state) => state.filters.name;
+export const selectNameFilter = (state) => {
+  return state.filters.name || state.filters.number;
+};

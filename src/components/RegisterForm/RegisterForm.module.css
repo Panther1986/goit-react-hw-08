@@ -7,3 +7,11 @@
   flex-direction: column;
   margin-bottom: 16px;
 }
+.btnRegister {
+  color: black;
+  background-color: #cfcfd4;
+}
+
+.btnRegister:hover {
+  background-color: grey;
+}
