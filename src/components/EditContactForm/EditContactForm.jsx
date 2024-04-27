@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { editContact } from "../../redux/contacts/operations";
 import { Formik, Form, Field } from "formik";
 import { ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { addContact } from "../../redux/contacts/operations";
-import css from "./ContactForm.module.css";
-import "react-toastify/dist/ReactToastify.css";
+import css from "./EditContactForm.module.css";
 
 const FeedbackSchema = Yup.object().shape({
   username: Yup.string()
@@ -15,19 +13,20 @@ const FeedbackSchema = Yup.object().shape({
   usernumber: Yup.string().min(3, "Too Short!").required("Required"),
 });
 
-const initialValues = {
-  username: "",
-  usernumber: "",
-};
-
-const ContactForm = () => {
+const EditContactForm = ({ contact }) => {
   const dispach = useDispatch();
+  const initialValues = {
+    username: contact.name,
+    usernumber: contact.number,
+  };
 
+  console.log(initialValues);
   const handleSubmit = (values, actions) => {
     dispach(
-      addContact({
+      editContact({
         name: values.username,
         number: values.usernumber,
+        id: contact.id,
       })
     );
     actions.resetForm();
@@ -60,11 +59,11 @@ const ContactForm = () => {
         </div>
 
         <button className={css.btnForm} type="submit">
-          Add contact
+          Save
         </button>
       </Form>
     </Formik>
   );
 };
 
-export default ContactForm;
+export default EditContactForm;
