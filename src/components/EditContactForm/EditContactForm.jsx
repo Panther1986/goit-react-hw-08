@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 import { ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./EditContactForm.module.css";
+import Modal from "react-modal";
 
 const FeedbackSchema = Yup.object().shape({
   username: Yup.string()
@@ -13,8 +14,8 @@ const FeedbackSchema = Yup.object().shape({
   usernumber: Yup.string().min(3, "Too Short!").required("Required"),
 });
 
-const EditContactForm = ({ contact }) => {
-  const dispach = useDispatch();
+const EditContactForm = ({ contact }, closeModal) => {
+  const dispatch = useDispatch();
   const initialValues = {
     username: contact.name,
     usernumber: contact.number,
@@ -22,7 +23,7 @@ const EditContactForm = ({ contact }) => {
 
   console.log(initialValues);
   const handleSubmit = (values, actions) => {
-    dispach(
+    dispatch(
       editContact({
         name: values.username,
         number: values.usernumber,
@@ -30,6 +31,7 @@ const EditContactForm = ({ contact }) => {
       })
     );
     actions.resetForm();
+    closeModal();
   };
   return (
     <Formik
@@ -38,6 +40,11 @@ const EditContactForm = ({ contact }) => {
       validationSchema={FeedbackSchema}
     >
       <Form className={css.formContainer}>
+        <div>
+          <button type="button" onClick={closeModal}>
+            Close
+          </button>
+        </div>
         <div className={css.labelContainer}>
           <label className={css.labelForm}>Name</label>
           <Field className={css.fieldForm} type="text" name="username" />
