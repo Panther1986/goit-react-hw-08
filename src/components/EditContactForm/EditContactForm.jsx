@@ -14,14 +14,13 @@ const FeedbackSchema = Yup.object().shape({
   usernumber: Yup.string().min(3, "Too Short!").required("Required"),
 });
 
-const EditContactForm = ({ contact }, closeModal) => {
+const EditContactForm = ({ contact }) => {
   const dispatch = useDispatch();
   const initialValues = {
     username: contact.name,
     usernumber: contact.number,
   };
 
-  console.log(initialValues);
   const handleSubmit = (values, actions) => {
     dispatch(
       editContact({
@@ -31,7 +30,6 @@ const EditContactForm = ({ contact }, closeModal) => {
       })
     );
     actions.resetForm();
-    closeModal();
   };
   return (
     <Formik
@@ -40,11 +38,6 @@ const EditContactForm = ({ contact }, closeModal) => {
       validationSchema={FeedbackSchema}
     >
       <Form className={css.formContainer}>
-        <div>
-          <button type="button" onClick={closeModal}>
-            Close
-          </button>
-        </div>
         <div className={css.labelContainer}>
           <label className={css.labelForm}>Name</label>
           <Field className={css.fieldForm} type="text" name="username" />

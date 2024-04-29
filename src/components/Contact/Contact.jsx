@@ -9,20 +9,8 @@ import Modal from "react-modal";
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
-  // const [isEditing, setIsEditing] = useState(false);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  // const handleEdit = () => {
-  //   setIsEditing(true);
-  // };
-
-  // const handleCancelEdit = () => {
-  //   setIsEditing(false);
-  // };
-
-  // const handleSaveEdit = () => {
-  //   setIsEditing(false);
-  // };
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete the contact?")) {
@@ -50,24 +38,29 @@ const Contact = ({ contact }) => {
           <FaPhoneAlt /> {contact.number}
         </p>
       </div>
-      <button className={css.btn} onClick={handleDelete}>
-        Delete
-      </button>
-      <button className={css.btn} onClick={openModal}>
-        Edit
-      </button>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <div>
+        <button className={css.btn} onClick={handleDelete}>
+          Delete
+        </button>
+        <button className={css.btn} onClick={openModal}>
+          Edit
+        </button>
+      </div>
+
+      <Modal
+        appElement={document.getElementById("root")}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+      >
+        <button className={css.btnClose} onClick={closeModal}>
+          Close
+        </button>
         <EditContactForm
           contact={{
             name: contact.name,
             number: contact.number,
             id: contact.id,
           }}
-          onSave={() => {
-            // Handle save logic if needed
-            closeModal();
-          }}
-          onCancel={closeModal}
         />
       </Modal>
     </>
