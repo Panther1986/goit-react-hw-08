@@ -1,7 +1,7 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
-import { PrivateRoute } from "../PrivareRoute/PrivareRoute";
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 import { RestrictedRoute } from "../RestrictedRoute/RestrictedRoute";
 import { refreshUser } from "../../redux/auth/operations";
 import { useAuth } from "../hooks/useAuth";

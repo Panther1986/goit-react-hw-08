@@ -5,6 +5,7 @@ import {
   editContact,
 } from "./operations";
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { logOut } from "../auth/operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -57,29 +58,10 @@ const contactsSlice = createSlice({
         );
         state.items.splice(index, 1, action.payload);
       })
-      .addCase(editContact.rejected, handleRejected),
+      .addCase(editContact.rejected, handleRejected)
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+      }),
 });
-
-export const selectContacts = (state) => state.contacts;
-
-export const selectLoading = createSelector(
-  [selectContacts],
-  (contacts) => contacts.loading
-);
-
-export const selectError = createSelector(
-  [selectContacts],
-  (contacts) => contacts.error
-);
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, (state) => state.filters.name || state.filters.number],
-  (contacts, filterName) => {
-    return contacts.items.filter(
-      (contact) =>
-        contact.name.includes(filterName) || contact.number.includes(filterName)
-    );
-  }
-);
 
 export const contactsReducer = contactsSlice.reducer;
